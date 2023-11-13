@@ -25,7 +25,7 @@ function AdicionaCoordenadasMouse(map, configuracoesLeaflet) {
             if (sistema == 'utm') {
                 return "" + pt.y.toFixed(0) + " N : " + pt.x.toFixed(0) + " E";
             }
-            return "Lat.:" + pt.y.toFixed(5) + " | Lon.:" + pt.x.toFixed(5) + "";
+            return "<div style='padding: 0.5rem; border:1px solid black'>Lat.:" + pt.y.toFixed(5) + " <br> Lon.:" + pt.x.toFixed(5) + "</div>";
         }
     });
     map.addControl(mousePosControl);
@@ -67,6 +67,7 @@ function CriaMenuContexto(map, configuracoesLeaflet) {
     let proj4text = configuracoesLeaflet.proj4text;
     let projCRS = new L.Proj.CRS(crs, proj4text);
     let popup = L.popup();
+
     map.on("contextmenu", (e) => {
         let coordenada = projCRS.project(L.latLng(e.latlng.lat, e.latlng.lng));
         if (sistema == 'utm') {
