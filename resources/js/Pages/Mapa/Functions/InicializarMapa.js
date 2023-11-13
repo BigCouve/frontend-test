@@ -41,7 +41,6 @@ function AdicionaEscala(map, largura=150, posicao="bottomright") {
         
     }).addTo(map)
     
-  
     logMessages && console.log("   [CreateMap] Escala adicionada ao mapa.");
 }
 
@@ -73,7 +72,7 @@ function CriaMenuContexto(map, configuracoesLeaflet) {
         if (sistema == 'utm') {
             let content = "<b>N</b>: " + coordenada.y.toFixed(0) + "<br><b>E</b>: " + coordenada.x.toFixed(0) + "<br>";
         }
-        let content = "<b>Lat.</b>: " + coordenada.y.toFixed(5) + " <br><b>Lon.</b>: " + coordenada.x.toFixed(5) + "<br>";
+        let content = "<b>Lat.</b>: &nbsp;&nbsp;" + coordenada.y.toFixed(5) + "<br><br><b>Lon.</b>: &nbsp;&nbsp;" + coordenada.x.toFixed(5) + "<br>";
         popup.setLatLng(e.latlng).setContent(content).openOn(map);
     });
     logMessages && console.log("   [CreateMap] Menu de contexto adicionado ao mapa.");
