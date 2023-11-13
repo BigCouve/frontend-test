@@ -72,7 +72,7 @@ function CriaMenuContexto(map, configuracoesLeaflet) {
         if (sistema == 'utm') {
             let content = "<b>N</b>: " + coordenada.y.toFixed(0) + "<br><b>E</b>: " + coordenada.x.toFixed(0) + "<br>";
         }
-        let content = "<b>Lat.</b>: &nbsp;&nbsp;" + coordenada.y.toFixed(5) + "<br><br><b>Lon.</b>: &nbsp;&nbsp;" + coordenada.x.toFixed(5) + "<br>";
+        let content = "<b>Lat.</b>: &nbsp;&nbsp;" + coordenada.y.toFixed(5) + "<br><br><b>Lon.</b>: &nbsp;&nbsp;" + coordenada.x.toFixed(5) + "<br><br> <b>Data:</b> &nbsp;&nbsp;" + formatarDataHora();
         popup.setLatLng(e.latlng).setContent(content).openOn(map);
     });
     logMessages && console.log("   [CreateMap] Menu de contexto adicionado ao mapa.");
@@ -110,6 +110,26 @@ function FuncaoMapaInformacoes(mapa) {
     };
     logMessages && console.log(mapa);
 }
+
+function formatarDataHora() {
+    const agora = new Date();
+
+    // Obtendo componentes da data
+    const dia = agora.getDate().toString().padStart(2, '0');
+    const mes = (agora.getMonth() + 1).toString().padStart(2, '0'); // Mês é base 0
+    const ano = agora.getFullYear();
+    const horas = agora.getHours().toString().padStart(2, '0');
+    const minutos = agora.getMinutes().toString().padStart(2, '0');
+    const segundos = agora.getSeconds().toString().padStart(2, '0');
+
+    // Criando a string formatada
+    const dataHoraFormatada = `${dia}/${mes}/${ano} ${horas}:${minutos}:${segundos}`;
+
+    // Exibindo a string formatada
+    return dataHoraFormatada;
+}
+
+
 
 export {
     ConfigsLeaflet,
