@@ -18,7 +18,7 @@ function AdicionaCoordenadasMouse(map, configuracoesLeaflet) {
     let proj4text = configuracoesLeaflet.proj4text;
     let projCRS = new L.Proj.CRS(crs, proj4text);
     let mousePosControl = L.control.mousePosition({
-        position: "bottomright",
+        position: "bottomleft",
         emptyString: "Coordenadas indisponíveis",
         formatter: function (lng, lat) {
             let pt = projCRS.project(L.latLng(lat, lng));
@@ -32,13 +32,16 @@ function AdicionaCoordenadasMouse(map, configuracoesLeaflet) {
     logMessages && console.log("   [CreateMap] Coordenadas do mouse adicionada ao mapa.");
 }
 
-function AdicionaEscala(map, largura=150, posicao="bottomleft") {
+function AdicionaEscala(map, largura=150, posicao="bottomright") {
     let escala = L.control.scale({
         position: posicao,
         metric: true,
         imperial: false,
         maxWidth: largura,
-    }).addTo(map);
+        
+    }).addTo(map)
+    
+  
     logMessages && console.log("   [CreateMap] Escala adicionada ao mapa.");
 }
 

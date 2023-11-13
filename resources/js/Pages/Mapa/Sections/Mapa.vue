@@ -34,7 +34,7 @@ let rasters = props.projeto.rasters;
 
 let map = ref(null);
 
-onMounted(() => {
+onMounted( async () => {
     // Objeto com as configurações do Leaflet para criação do objeto map
     let configs = ConfigsLeaflet(configsMapa);
     
@@ -60,7 +60,7 @@ onMounted(() => {
     map.doubleClickZoom.disable();
 
     // Adiciona escala ao mapa caso configsMapa.funcionalidades.escala seja true
-    configsMapa.funcionalidades.escala ? AdicionaEscala(map) : configsMapa.funcionalidades.escala;
+    configsMapa.funcionalidades.escala ? await AdicionaEscala(map) : configsMapa.funcionalidades.escala;
 
     // Adiciona atribuições (fonte de dados) ao mapa    
     configsMapa.funcionalidades.atribuicoes ? AdicionaAttribution(map, configsMapa.configuracoesLeaflet.atribuicaoPrefixo) : map.attributionControl.remove();
@@ -78,9 +78,30 @@ onMounted(() => {
     window.ToggleRaster = function (nomeRaster) {
         rasters.forEach(raster => raster.nome == nomeRaster ? ToggleRasterTile(map, raster) : null);
     };
+
+    // Realiza estilização do mapa após ser montado
+    alterarEstilos()
+
 });
+
+function alterarEstilos() {
+    // Acesse o elemento de escala usando querySelector
+    const elemento = document.querySelector('.leaflet-control-mouseposition');
+    
+    // Modificações de estilo
+    if (elemento) {
+        elemento.style.backgroundColor = 'rgb(255,255,255,0.5)'; 
+        elemento.style.fontSize = '1rem'; 
+    }
+
+    
+};
 </script>
 
 <template>
     <div id="map" class="z-[5] h-[calc(100vh)] max-h-[calc(100vh)]"></div>
 </template>
+
+<style lang="scss" scoped>
+    
+</style>
